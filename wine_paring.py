@@ -1,3 +1,22 @@
+"""
+Wine Pairing Application
+-------------------------
+This application provides wine pairing recommendations based on selected dish types.
+It utilizes a predefined set of wine pairing rules stored in a pandas DataFrame.
+Users can select a dish type from a dropdown menu and receive suggestions for wine color,
+body, flavor, and brand.
+
+Features:
+- User-friendly GUI built with Tkinter
+- Combobox for dish selection
+- Display of wine recommendations
+- Exit functionality
+
+Author: [Ranga Seshadri]
+Date: [24-Sep-2024]
+
+"""
+
 import tkinter as tk
 from tkinter import ttk
 import pandas as pd
