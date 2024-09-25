@@ -1,3 +1,35 @@
+"""
+Decision Tree Navigator
+
+This program implements an interactive decision tree navigator with a graphical user interface.
+It reads decision tree data from an Excel file and guides the user through a series of
+questions, visualizing the decision path as a tree diagram.
+
+Features:
+- Reads decision tree structure from an Excel file
+- Provides a command-line interface for user input
+- Dynamically updates and displays the decision tree diagram
+- Uses Tkinter for the graphical user interface
+- Utilizes Graphviz for generating the decision tree visualization
+
+Dependencies:
+- pandas: For reading the Excel file
+- graphviz: For generating the decision tree diagram
+- openpyxl: For Excel file support with pandas
+- Pillow (PIL): For image processing
+- tkinter: For the graphical user interface
+
+Usage:
+1. Ensure all dependencies are installed
+2. Prepare an Excel file with the decision tree structure
+3. Update the Excel file path in the main() function
+4. Run the script
+
+Author: [Ranga Seshadri]
+Date: [2024-09-25]
+Version: 1.0
+"""
+
 import pandas as pd
 import graphviz
 import openpyxl  # Ensure openpyxl is imported
