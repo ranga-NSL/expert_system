@@ -35,18 +35,34 @@ wine_pairing_rules = pd.DataFrame({
 # Create the main application window
 root = tk.Tk()
 root.title("Wine Pairing Recommendations")
+root.geometry("400x300")  # Set a fixed size for the window
+
+# Create a main frame
+main_frame = ttk.Frame(root, padding="10")
+main_frame.grid(row=0, column=0, sticky=(tk.W, tk.E, tk.N, tk.S))
+root.columnconfigure(0, weight=1)
+root.rowconfigure(0, weight=1)
 
 # Create a label for instructions
-instruction_label = tk.Label(root, text="Select a dish type:")
-instruction_label.pack(pady=10)
+instruction_label = ttk.Label(main_frame, text="Select a dish type:")
+instruction_label.grid(row=0, column=0, columnspan=2, pady=(0, 5), sticky=tk.W)
 
 # Create a combobox for dish types
-dish_type_combobox = ttk.Combobox(root, values=wine_pairing_rules['Dish Type'].tolist())
-dish_type_combobox.pack(pady=5)
+dish_type_combobox = ttk.Combobox(main_frame, values=wine_pairing_rules['Dish Type'].tolist(), width=30)
+dish_type_combobox.grid(row=1, column=0, columnspan=2, pady=(0, 10), sticky=tk.W)
+
+# Create a label for recommendation caption
+recommendation_caption = ttk.Label(main_frame, text="Recommendation:", font=("Arial", 10, "bold"))
+recommendation_caption.grid(row=2, column=0, columnspan=2, pady=(10, 5), sticky=tk.W)
+
+# Create a frame for recommendation display
+recommendation_frame = ttk.Frame(main_frame, borderwidth=1, relief="solid", padding="5")
+recommendation_frame.grid(row=3, column=0, columnspan=2, sticky=(tk.W, tk.E))
+main_frame.columnconfigure(1, weight=1)
 
 # Create a label to display recommendations
-recommendation_label = tk.Label(root, text="", wraplength=300)
-recommendation_label.pack(pady=10)
+recommendation_label = ttk.Label(recommendation_frame, text="", wraplength=350)
+recommendation_label.pack(expand=True, fill=tk.BOTH)
 
 # Function to get wine recommendation
 def get_wine_recommendation():
@@ -64,10 +80,10 @@ def get_wine_recommendation():
         # Get the corresponding wine attributes using the index
         wine_info = wine_pairing_rules.loc[index[0]]  # Get the first matching row
         recommendation = (
-            f"Suggested wine for {dish_type}: "
-            f"Color: {wine_info['Wine Color']}, "
-            f"Body: {wine_info['Wine Body']}, "
-            f"Flavor: {wine_info['Wine Flavor']}, "
+            f"Suggested wine for {dish_type}:\n"
+            f"Color: {wine_info['Wine Color']}\n"
+            f"Body: {wine_info['Wine Body']}\n"
+            f"Flavor: {wine_info['Wine Flavor']}\n"
             f"Brand: {wine_info['Wine Brand']}"
         )
         recommendation_label.config(text=recommendation)
@@ -75,12 +91,12 @@ def get_wine_recommendation():
         recommendation_label.config(text=f"No wine pairing rule found for {dish_type}.")
 
 # Create a button to get the wine recommendation
-recommend_button = tk.Button(root, text="Get Recommendation", command=get_wine_recommendation)
-recommend_button.pack(pady=5)
+recommend_button = ttk.Button(main_frame, text="Get Recommendation", command=get_wine_recommendation)
+recommend_button.grid(row=4, column=1, pady=(10, 0), padx=(5, 0), sticky=tk.E)
 
 # Create an exit button
-exit_button = tk.Button(root, text="Exit", command=root.quit)
-exit_button.pack(pady=5)
+exit_button = ttk.Button(main_frame, text="Exit", command=root.quit)
+exit_button.grid(row=5, column=1, pady=(5, 0), padx=(5, 0), sticky=tk.E)
 
 # Run the application
 root.mainloop()
